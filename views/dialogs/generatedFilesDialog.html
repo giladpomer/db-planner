@@ -1,0 +1,47 @@
+﻿<md-dialog aria-label="Choose Programming Language">
+    <form ng-cloak>
+        <md-toolbar ng-class="templates[selectedTemplateIndex].configError ? 'md-warn' : 'md-primary'">
+            <div class="md-toolbar-tools">
+                <h2>Choose Programming Language</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="assets/svg/close.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content style="width: 800px;">
+            <md-tabs md-selected="selectedTemplateIndex" md-dynamic-height md-border-bottom>
+                <md-tab label="{{template.configError ? 'Error loading template' : template.title}}" ng-repeat="template in templates">
+                    <md-content class="md-padding" ng-if="!template.configError">
+                        <h2>Create Table Statements</h2>
+                        <div ui-ace="{{codeEditor.getConfig(template.databaseEditorLanguage)}}" ng-model="template.createCode" class="create-statements"></div>
+
+                        <h2>Generated Objects</h2>
+                        <md-tabs md-dynamic-height md-border-bottom>
+                            <md-tab label="{{objectCode.fileName}}" ng-repeat="objectCode in template.objectsCode">
+                                <md-content>
+                                    <div ui-ace="{{codeEditor.getConfig(template.objectsEditorLanguage)}}" ng-model="objectCode.code" class="generated-objects"></div>
+                                </md-content>
+                            </md-tab>
+                        </md-tabs>
+                    </md-content>
+
+                    <md-content class="md-padding" ng-if="template.configError">
+                        <h1>Oops...</h1>
+                        <h2>An error occured while loading the config file of this template:</h2>
+                        <h3>{{template.configError}}</h3>
+                        <h5>Please check the config file in the template editor</h5>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" ng-hide="templates[selectedTemplateIndex].configError">
+            <md-button ng-click="download(templates[selectedTemplateIndex].objectsCode)" class="md-primary md-raised" md-autofocus>
+                Download All {{templates[selectedTemplateIndex].title}} Files
+            </md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>

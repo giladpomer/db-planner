@@ -1,0 +1,90 @@
+﻿html, body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Input Container */
+.minimum-space {
+    margin: 5px;
+}
+
+    .minimum-space .md-errors-spacer {
+        min-height: 0;
+    }
+
+/* List Items */
+md-sidenav md-list {
+    padding: 0px 0px 8px 0px;
+}
+
+md-list-item {
+    opacity: 1;
+}
+
+md-list .md-list-item-text.selected h3 {
+    color: #03a9f4 !important;
+}
+
+/* List Items Animations */
+md-list-item.ng-enter {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    opacity: 0;
+}
+
+md-list-item.ng-enter-active {
+    opacity: 1;
+}
+
+/* Columns Editor */
+.table-name-title input {
+    color: #ffffff;
+}
+
+#content {
+    padding: 0;
+}
+
+    #content md-card {
+        margin: 20px 130px;
+    }
+
+/* Primary Key */
+.rotate-key {
+    -ms-transform: rotate(135deg); /* IE 9 */
+    -webkit-transform: rotate(135deg); /* Chrome, Safari, Opera */
+    transform: rotate(135deg);
+}
+
+.nofocus:focus {
+    outline: none;
+}
+
+.key-off {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+    opacity: 0.3;
+}
+
+/* Dialogs */
+md-dialog .md-button, .md-tab {
+    text-transform: none;
+}
+
+md-dialog {
+        max-height: 95%;
+}
+
+/* ACE editors */
+.create-statements.ace_editor {
+    height: 70px;
+}
+
+.generated-objects.ace_editor,
+.template-config-file.ace_editor,
+.template-file.ace_editor {
+    height: 400px;
+}

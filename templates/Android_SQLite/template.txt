@@ -1,0 +1,100 @@
+package db;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
+public class {{TableName}} {
+	private static final String DB_NAME = "{{DatabaseName}}";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private Context context;
+
+    {{fields}}
+
+    public {{TableName}}(Context context) {
+        this.context = context;
+        createTableIfNotExists();
+    }
+
+    private {{TableName}}({{fieldsAsMethodParams}}) {
+		{{fieldsInConstructor}}
+    }
+
+    protected void createTableIfNotExists() {
+        executeNonQuery("{{createTable}}");
+    }
+
+    /* Getters */
+	{{fieldsGetters}}
+
+    /* DB Methods */
+    public void add({{fieldsAsMethodParams}}) {
+		executeNonQuery("INSERT INTO {{TableName}} VALUES ({{fieldsInInsertValues}})");
+    }
+	
+    public ArrayList<{{TableName}}> getAll() {
+        SQLiteDatabase database = openOrCreateDatabase();
+        ArrayList<{{TableName}}> {{tableName}} = new ArrayList<>();
+
+        Cursor c = database.rawQuery("SELECT * FROM {{TableName}}", null);
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+			{{tableName}}.add(new {{TableName}}({{fieldsInGetAll}}));
+        }
+
+        database.close();
+        return {{tableName}};
+    }
+
+    /* Utils */
+    protected SQLiteDatabase openOrCreateDatabase() {
+        return context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
+    }
+
+    private String escape(String value) {
+        return DatabaseUtils.sqlEscapeString(value);
+    }
+
+    private String escape(Object object) {
+        return escape(String.valueOf(object));
+    }
+
+    private void executeNonQuery(String sqlQuery) {
+        SQLiteDatabase database = openOrCreateDatabase();
+        database.execSQL(sqlQuery);
+        database.close();
+    }
+
+    /* Date Utils */
+    protected String formatDate(Date date) {
+        if (null == date) {
+            return "";
+        }
+
+        DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
+        return dateFormat.format(date);
+    }
+
+    protected Date getDate(Cursor cursor, String columnName) {
+        String dateString = cursor.getString(cursor.getColumnIndex(columnName));
+        if (dateString.equals("")) {
+            return null;
+        }
+
+        DateFormat df = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
+        Date result = null;
+        try {
+            result = df.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+}

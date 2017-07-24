@@ -1,0 +1,22 @@
+﻿<md-card md-theme-watch>
+    <md-input-container md-no-float class="minimum-space">
+        <input type="text" autofocus ng-model="databaseNameEditor" placeholder="Database Name" on-enter-key="addDatabase(databaseNameEditor)">
+    </md-input-container>
+    <md-card-actions layout="row" layout-align="end center">
+        <md-button ng-click="addDatabase(databaseNameEditor)">Add</md-button>
+    </md-card-actions>
+</md-card>
+
+<md-list>
+    <md-list-item ng-repeat="database in databases" ng-click="selectDatabase(database)" class="md-2-line">
+        <div ng-class="['md-list-item-text', {'selected' : database === getCurrentDatabase() }]">
+            <h3>{{database.name}}</h3>
+            <p>{{database.tables.length}} tables</p>
+        </div>
+        <md-button class="md-secondary md-warn" ng-click="deleteDatabase($index)">
+            Delete
+        </md-button>
+
+        <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+</md-list>

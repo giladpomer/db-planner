@@ -1,0 +1,20 @@
+﻿<md-fab-speed-dial md-open="demo.isOpen" md-direction="up" class="md-scale md-hover-full md-fab-bottom-right"
+                   ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
+    <md-fab-trigger>
+        <md-button ng-disabled="noTablesInCurrentDB()" aria-label="Download generated files" class="md-fab md-primary" ng-click="openGeneratedFilesDialog($event)">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible">Download generated files</md-tooltip>
+            <md-icon md-svg-src="assets/svg/file_download.svg" aria-label="Download generated files"></md-icon>
+        </md-button>
+    </md-fab-trigger>
+
+    <md-fab-actions>
+        <md-button ng-disabled="noTablesInCurrentDB()" aria-label="Download DB Structure" class="md-fab md-raised md-mini md-primary" ng-click="downloadStructure()">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible">Download DB Structure</md-tooltip>
+            <md-icon md-svg-src="assets/svg/file.svg" aria-label="Download DB Structure"></md-icon>
+        </md-button>
+        <md-button aria-label="Edit Templates" class="md-fab md-raised md-mini md-accent" ng-click="openTemplatesEditorDialog($event)">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible">Edit Templates</md-tooltip>
+            <md-icon md-svg-src="assets/svg/code.svg" aria-label="Edit Templates"></md-icon>
+        </md-button>
+    </md-fab-actions>
+</md-fab-speed-dial>

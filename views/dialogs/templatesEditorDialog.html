@@ -1,0 +1,27 @@
+﻿<md-dialog aria-label="Templates Editor">
+    <form ng-cloak>
+        <md-toolbar ng-class="templates[selectedTemplateIndex].configError ? 'md-warn' : 'md-accent'">
+            <div class="md-toolbar-tools">
+                <h2>Templates Editor</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="assets/svg/close.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content style="width: 800px; max-height:800px;">
+            <md-tabs md-selected="selectedTemplateIndex" md-dynamic-height md-border-bottom>
+                <md-tab label="{{template.configError ? 'Error loading template' : template.title}}" ng-repeat="template in templates">
+                    <md-content class="md-padding">
+                        <h2>config.js</h2>
+                        <div ui-ace="{{codeEditor.getConfig('javascript')}}" ng-model="template.sourceCode" class="template-config-file"></div>
+
+                        <h2>template.txt</h2>
+                        <div ui-ace="{{codeEditor.getConfig(template.objectsEditorLanguage)}}" ng-model="template.templateFileContent" class="template-file"></div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+    </form>
+</md-dialog>
