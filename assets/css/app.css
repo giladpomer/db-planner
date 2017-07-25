@@ -90,6 +90,10 @@ md-dialog-content {
     max-width: 100%;
 }
 
+md-dialog-content md-progress-circular {
+    margin: 20px;
+}
+
 /* ACE editors */
 .create-statements.ace_editor {
     height: 70px;

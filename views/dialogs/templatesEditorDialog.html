@@ -10,7 +10,13 @@
             </div>
         </md-toolbar>
 
-        <md-dialog-content>
+        <md-dialog-content ng-show="isLoading">
+            <div layout="row" layout-align="space-around">
+                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-content ng-hide="isLoading">
             <md-tabs md-selected="selectedTemplateIndex" md-dynamic-height md-border-bottom>
                 <md-tab label="{{template.configError ? 'Error loading template' : template.title}}" ng-repeat="template in templates">
                     <md-content class="md-padding">

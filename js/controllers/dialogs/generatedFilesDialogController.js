@@ -1,6 +1,8 @@
 ﻿angular.module('dbPlannerApp').controller('GeneratedFilesDialogController',
                 ['$scope', '$mdDialog', 'CurrentDatabaseService', 'TemplatesService', 'CodeEditorService',
         function ($scope, $mdDialog, CurrentDatabaseService, TemplatesService, CodeEditorService) {
+            $scope.isLoading = true;
+
             $scope.cancel = function () {
                 $mdDialog.cancel();
             };
@@ -8,6 +10,8 @@
             $scope.download = function (dataToDownload) {
                 $mdDialog.hide(dataToDownload);
             };
+
+            $scope.codeEditor = CodeEditorService;
 
             function toCamelCase(input, isUpper) {
                 var result = '';
@@ -83,7 +87,6 @@
                     });
                     template.createCode = createStatements.join("\n");
                 });
+                $scope.isLoading = false;
             });
-
-            $scope.codeEditor = CodeEditorService;
         }]);
