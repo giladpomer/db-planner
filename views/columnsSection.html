@@ -8,9 +8,8 @@
 
 <md-card>
     <md-list-item ng-repeat="column in selectedTable.columns" class="md-1-line">
-        <md-button class="md-icon-button" aria-label="IsPrimaryKey">
-            <md-icon ng-model="column.isPrimaryKey" ng-click="column.isPrimaryKey=!column.isPrimaryKey"
-                     md-svg-icon="assets/svg/key.svg" ng-class="['nofocus', 'rotate-key', {'key-off': !column.isPrimaryKey}]"></md-icon>
+        <md-button class="md-icon-button" aria-label="IsPrimaryKey" ng-click="column.isPrimaryKey=!column.isPrimaryKey">
+            <md-icon ng-model="column.isPrimaryKey" md-svg-icon="assets/svg/key.svg" ng-class="['nofocus', 'rotate-key', {'key-off': !column.isPrimaryKey}]"></md-icon>
         </md-button>
 
         <md-input-container md-no-float class="minimum-space">
@@ -24,8 +23,8 @@
             <input required md-select-on-focus name="clientName" ng-model="column.name" placeholder="Column Name">
         </md-input-container>
 
-        <md-button class="md-secondary md-warn" ng-click="selectedTable.columns.splice($index, 1)">
-            Delete
+        <md-button class="md-icon-button md-secondary" aria-label="Delete" ng-click="selectedTable.columns.splice($index, 1)">
+            <md-icon md-svg-icon="assets/svg/delete.svg" class="delete"></md-icon>
         </md-button>
 
         <md-divider ng-if="!$last"></md-divider>
@@ -34,9 +33,8 @@
 
 <md-card>
     <md-list-item class="md-1-line">
-        <md-button class="md-icon-button" aria-label="IsPrimaryKey">
-            <md-icon ng-model="columnEditor.isPrimaryKey" ng-click="columnEditor.isPrimaryKey=!columnEditor.isPrimaryKey"
-                     md-svg-icon="assets/svg/key.svg" ng-class="['nofocus', 'rotate-key', {'key-off': !columnEditor.isPrimaryKey}]"></md-icon>
+        <md-button class="md-icon-button" aria-label="IsPrimaryKey" ng-click="columnEditor.isPrimaryKey=!columnEditor.isPrimaryKey">
+            <md-icon ng-model="columnEditor.isPrimaryKey" md-svg-icon="assets/svg/key.svg" ng-class="['nofocus', 'rotate-key', {'key-off': !columnEditor.isPrimaryKey}]"></md-icon>
         </md-button>
         <md-input-container md-no-float class="minimum-space">
             <md-select placeholder="Data Type" name="type" ng-model="columnTypeEditor" required>
@@ -49,8 +47,8 @@
             <input md-select-on-focus ng-model="columnNameEditor" on-enter-key="addColumn(columnNameEditor)" placeholder="Column Name">
         </md-input-container>
 
-        <md-button class="md-secondary" ng-click="addColumn(columnNameEditor)">
-            Add
+        <md-button class="md-icon-button md-secondary" aria-label="Add" ng-click="addColumn(columnNameEditor)">
+            <md-icon md-svg-icon="assets/svg/add.svg"></md-icon>
         </md-button>
 
         <md-divider ng-if="!$last"></md-divider>

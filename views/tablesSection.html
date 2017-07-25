@@ -15,8 +15,8 @@
             <h3>{{table.name}}</h3>
             <p>{{table.columns.length}} columns</p>
         </div>
-        <md-button class="md-secondary md-warn" ng-click="deleteTable($index)">
-            Delete
+        <md-button class="md-icon-button md-secondary" aria-label="Delete" ng-click="deleteTable($index)">
+            <md-icon md-svg-icon="assets/svg/delete.svg" class="delete"></md-icon>
         </md-button>
 
         <md-divider ng-if="!$last"></md-divider>

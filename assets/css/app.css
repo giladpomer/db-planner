@@ -10,6 +10,16 @@
     z-index: 100;
 }
 
+/* Delete Button */
+md-icon.delete svg {
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    fill: darkgray;
+}
+md-icon.delete:hover svg {
+    fill: gray;
+}
+
 /* Input Container */
 .minimum-space {
     margin: 5px;
@@ -90,9 +100,9 @@ md-dialog-content {
     max-width: 100%;
 }
 
-md-dialog-content md-progress-circular {
-    margin: 20px;
-}
+    md-dialog-content md-progress-circular {
+        margin: 20px;
+    }
 
 /* ACE editors */
 .create-statements.ace_editor {
