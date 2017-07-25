@@ -2,7 +2,7 @@
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('blue')
-            .accentPalette('blue-grey');
+            .accentPalette('light-blue');
     })
     .directive('onEnterKey', function () {
         return function (scope, element, attrs) {

@@ -1,7 +1,11 @@
 ﻿angular.module('dbPlannerApp').controller('DatabasesController',
-                ['$scope', '$mdDialog', 'CurrentDatabaseService', 'FileGeneratorService', '$mdToast',
-        function ($scope, $mdDialog, CurrentDatabaseService, FileGeneratorService, $mdToast) {
+                ['$scope', '$mdDialog', 'CurrentDatabaseService', 'FileGeneratorService', '$mdToast', '$mdSidenav', '$mdComponentRegistry',
+        function ($scope, $mdDialog, CurrentDatabaseService, FileGeneratorService, $mdToast, $mdSidenav, $mdComponentRegistry) {
             $scope.databases = [];
+
+            $scope.setFocus = function (elementId) {
+                document.getElementById(elementId).focus();
+            };
 
             function showToast(text) {
                 $mdToast.show(
@@ -11,6 +15,23 @@
                     .hideDelay(3000)
                 );
             }
+
+            /* Sidenav Menu */
+            $scope.toggleDatabases = function () {
+                $mdSidenav('databases').toggle()
+                    .then(function () {
+                        $scope.setFocus('databaseNameEditor');
+                    });
+            };
+            $scope.closeDatabases = function () {
+                $mdComponentRegistry.when('databases').then(function () {
+                    var sidenav = $mdSidenav('databases');
+                    if (sidenav.isOpen()) {
+                        sidenav.close();
+                        $scope.setFocus('tableNameEditor');
+                    }
+                });
+            };
 
             /* Floating Button */
             $scope.noTablesInCurrentDB = function () {
@@ -55,6 +76,7 @@
             $scope.selectDatabase = function (database) {
                 CurrentDatabaseService.set(database);
                 $scope.tableNameEditor = '';
+                $scope.closeDatabases();
             };
             $scope.selectTable = function (table) {
                 $scope.selectedTable = table;
@@ -129,4 +151,6 @@
                 $scope.columnNameEditor = '';
                 $scope.columnEditor.isPrimaryKey = false;
             };
+
+            $scope.addDatabase("Untitled Database");
         }]);

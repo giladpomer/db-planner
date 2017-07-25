@@ -21,7 +21,13 @@
 
     <md-toolbar layout="row" class="main-title">
         <div class="md-toolbar-tools">
-            <h1 flex>DB Planner</h1>
+            <md-button ng-click="toggleDatabases()" class="md-icon-button" aria-label="Databases list">
+                <md-icon md-svg-icon="assets/svg/menu.svg"></md-icon>
+            </md-button>
+
+            <md-input-container md-no-float class="minimum-space editable-title" flex>
+                <input md-select-on-focus autofocus type="text" ng-model="getCurrentDatabase().name" placeholder="Database Name" on-enter-key="setFocus('tableNameEditor')">
+            </md-input-container>
 
             <md-button class="md-icon-button" aria-label="Source On GitHub" ng-href="https://github.com/giladshapira/db-planner" target="_blank">
                 <img src="assets/png/github.png" style="width: 24px; height: 24px;">
@@ -29,12 +35,12 @@
         </div>
     </md-toolbar>
 
-    <div flex layout="row">
-        <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
+    <section flex layout="row">
+        <md-sidenav class="md-sidenav-left" md-is-locked-open="false" md-whiteframe="4" md-component-id="databases" id="databasesSection">
             <databases-section></databases-section>
         </md-sidenav>
 
-        <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2" ng-hide="databases.length === 0">
+        <md-sidenav md-is-locked-open="true" md-whiteframe="4" ng-hide="databases.length === 0">
             <tables-section></tables-section>
         </md-sidenav>
 
@@ -44,12 +50,12 @@
                 <h1>
                     Getting Started
                 </h1>
-                <h3>1. Add a database</h3>
-                <h3>2. Add tables to the selected database</h3>
-                <h3>3. Add columns to the selected table</h3>
+                <h3>1. Choose a database name</h3>
+                <h3>2. Add tables</h3>
+                <h3>3. Add columns</h3>
             </div>
         </md-content>
-    </div>
+    </section>
 
     <div layout="row">
         <floating-button></floating-button>

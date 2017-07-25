@@ -1,6 +1,15 @@
-﻿<md-card md-theme-watch>
+﻿<md-toolbar>
+    <div class="md-toolbar-tools">
+        <span flex>Databases ({{databases.length}})</span>
+        <md-button class="md-icon-button" ng-click="closeDatabases()">
+            <md-icon md-svg-src="assets/svg/close.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-card md-theme-watch>
     <md-input-container md-no-float class="minimum-space">
-        <input type="text" autofocus ng-model="databaseNameEditor" placeholder="Database Name" on-enter-key="addDatabase(databaseNameEditor)">
+        <input type="text" ng-model="databaseNameEditor" placeholder="Database Name" on-enter-key="addDatabase(databaseNameEditor)" id="databaseNameEditor">
     </md-input-container>
     <md-card-actions layout="row" layout-align="end center">
         <md-button ng-click="addDatabase(databaseNameEditor)">Add</md-button>

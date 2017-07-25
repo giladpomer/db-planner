@@ -6,6 +6,10 @@
     padding: 0;
 }
 
+#databasesSection {
+    z-index: 100;
+}
+
 /* Input Container */
 .minimum-space {
     margin: 5px;
@@ -40,7 +44,7 @@ md-list-item.ng-enter-active {
 }
 
 /* Columns Editor */
-.table-name-title input {
+.editable-title input {
     color: #ffffff;
 }
 
@@ -66,7 +70,7 @@ md-list-item.ng-enter-active {
 .key-off {
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
-    opacity: 0.3;
+    opacity: 0.7;
 }
 
 /* Dialogs */
@@ -75,7 +79,7 @@ md-dialog .md-button, .md-tab {
 }
 
 md-dialog {
-        max-height: 95%;
+    max-height: 95%;
 }
 
 /* ACE editors */
