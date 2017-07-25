@@ -52,9 +52,11 @@ md-list-item.ng-enter-active {
     padding: 0;
 }
 
+@media (min-width: 980px) {
     #content md-card {
         margin: 20px 130px;
     }
+}
 
 /* Primary Key */
 .rotate-key {
@@ -80,6 +82,12 @@ md-dialog .md-button, .md-tab {
 
 md-dialog {
     max-height: 95%;
+}
+
+md-dialog-content {
+    width: 800px;
+    max-height: 800px;
+    max-width: 100%;
 }
 
 /* ACE editors */

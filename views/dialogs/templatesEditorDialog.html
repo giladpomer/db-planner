@@ -10,7 +10,7 @@
             </div>
         </md-toolbar>
 
-        <md-dialog-content style="width: 800px; max-height:800px;">
+        <md-dialog-content>
             <md-tabs md-selected="selectedTemplateIndex" md-dynamic-height md-border-bottom>
                 <md-tab label="{{template.configError ? 'Error loading template' : template.title}}" ng-repeat="template in templates">
                     <md-content class="md-padding">
@@ -23,5 +23,11 @@
                 </md-tab>
             </md-tabs>
         </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()" class="md-raised" md-autofocus>
+                Close
+            </md-button>
+        </md-dialog-actions>
     </form>
 </md-dialog>

@@ -13,14 +13,14 @@
                      md-svg-icon="assets/svg/key.svg" ng-class="['nofocus', 'rotate-key', {'key-off': !column.isPrimaryKey}]"></md-icon>
         </md-button>
 
-        <md-input-container md-no-float flex="15" class="minimum-space">
+        <md-input-container md-no-float class="minimum-space">
             <md-select placeholder="Data Type" name="type" ng-model="column.type" required>
                 <md-option value="text">Text</md-option>
                 <md-option value="number">Number</md-option>
                 <md-option value="date">Date</md-option>
             </md-select>
         </md-input-container>
-        <md-input-container md-no-float flex="85" class="minimum-space">
+        <md-input-container md-no-float flex class="minimum-space">
             <input required md-select-on-focus name="clientName" ng-model="column.name" placeholder="Column Name">
         </md-input-container>
 
@@ -38,14 +38,14 @@
             <md-icon ng-model="columnEditor.isPrimaryKey" ng-click="columnEditor.isPrimaryKey=!columnEditor.isPrimaryKey"
                      md-svg-icon="assets/svg/key.svg" ng-class="['nofocus', 'rotate-key', {'key-off': !columnEditor.isPrimaryKey}]"></md-icon>
         </md-button>
-        <md-input-container md-no-float flex="15" class="minimum-space">
+        <md-input-container md-no-float class="minimum-space">
             <md-select placeholder="Data Type" name="type" ng-model="columnTypeEditor" required>
                 <md-option selected value="text">Text</md-option>
                 <md-option value="number">Number</md-option>
                 <md-option value="date">Date</md-option>
             </md-select>
         </md-input-container>
-        <md-input-container md-no-float flex="85" class="minimum-space">
+        <md-input-container md-no-float flex class="minimum-space">
             <input md-select-on-focus ng-model="columnNameEditor" on-enter-key="addColumn(columnNameEditor)" placeholder="Column Name">
         </md-input-container>
 

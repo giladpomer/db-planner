@@ -10,7 +10,7 @@
             </div>
         </md-toolbar>
 
-        <md-dialog-content style="width: 800px;">
+        <md-dialog-content>
             <md-tabs md-selected="selectedTemplateIndex" md-dynamic-height md-border-bottom>
                 <md-tab label="{{template.configError ? 'Error loading template' : template.title}}" ng-repeat="template in templates">
                     <md-content class="md-padding" ng-if="!template.configError">
@@ -41,7 +41,6 @@
             <md-button ng-click="download(templates[selectedTemplateIndex].objectsCode)" class="md-primary md-raised" md-autofocus>
                 Download
             </md-button>
-
         </md-dialog-actions>
     </form>
 </md-dialog>
