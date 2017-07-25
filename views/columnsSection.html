@@ -1,7 +1,7 @@
 ﻿<md-toolbar class="md-accent">
     <div class="md-toolbar-tools">
         <md-input-container md-no-float class="minimum-space editable-title" flex="100">
-            <input md-select-on-focus type="text" ng-model="selectedTable.name" placeholder="Table Name">
+            <input md-select-on-focus type="text" ng-model="selectedTable.name" placeholder="Table Name" on-enter-key="focusOnNextColumn(-1)">
         </md-input-container>
     </div>
 </md-toolbar>
@@ -20,7 +20,7 @@
             </md-select>
         </md-input-container>
         <md-input-container md-no-float flex class="minimum-space">
-            <input required md-select-on-focus name="clientName" ng-model="column.name" placeholder="Column Name">
+            <input required ng-model="column.name" on-enter-key="focusOnNextColumn($index)" placeholder="Column Name" class="columnName">
         </md-input-container>
 
         <md-button class="md-icon-button md-secondary" aria-label="Delete" ng-click="selectedTable.columns.splice($index, 1)">
@@ -44,7 +44,7 @@
             </md-select>
         </md-input-container>
         <md-input-container md-no-float flex class="minimum-space">
-            <input md-select-on-focus ng-model="columnNameEditor" on-enter-key="addColumn(columnNameEditor)" placeholder="Column Name">
+            <input ng-model="columnNameEditor" on-enter-key="addColumn(columnNameEditor)" placeholder="Column Name" id="columnNameEditor">
         </md-input-container>
 
         <md-button class="md-icon-button md-secondary" aria-label="Add" ng-click="addColumn(columnNameEditor)">

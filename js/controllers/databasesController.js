@@ -1,8 +1,6 @@
 ﻿angular.module('dbPlannerApp').controller('DatabasesController',
-                ['$scope', '$mdDialog', 'CurrentDatabaseService', 'FileGeneratorService', '$mdToast', '$mdSidenav', '$mdComponentRegistry',
-        function ($scope, $mdDialog, CurrentDatabaseService, FileGeneratorService, $mdToast, $mdSidenav, $mdComponentRegistry) {
-            $scope.databases = [];
-
+                ['$scope', '$mdDialog', '$mdToast', '$mdSidenav', '$mdComponentRegistry', 'CurrentDatabaseService', 'FileGeneratorService',
+        function ($scope, $mdDialog, $mdToast, $mdSidenav, $mdComponentRegistry, CurrentDatabaseService, FileGeneratorService) {
             $scope.setFocus = function (elementId) {
                 document.getElementById(elementId).focus();
             };
@@ -16,7 +14,9 @@
                 );
             }
 
-            /* Sidenav Menu */
+            /* Databases */
+            $scope.databases = [];
+
             $scope.toggleDatabases = function () {
                 $mdSidenav('databases').toggle()
                     .then(function () {
@@ -31,6 +31,92 @@
                         $scope.setFocus('tableNameEditor');
                     }
                 });
+            };
+
+            $scope.selectDatabase = function (database) {
+                CurrentDatabaseService.set(database);
+                $scope.tableNameEditor = '';
+                $scope.closeDatabases();
+            };
+            $scope.getCurrentDatabase = function () {
+                return CurrentDatabaseService.get();
+            };
+            $scope.addDatabase = function (name) {
+                if (name.trim().length === 0) {
+                    return;
+                }
+
+                var database = {
+                    name: name,
+                    tables: []
+                };
+
+                $scope.databases.push(database);
+                $scope.databaseNameEditor = '';
+                $scope.selectDatabase(database);
+            };
+            $scope.deleteDatabase = function (index) {
+                var isSelected = $scope.databases[index] === CurrentDatabaseService.get();
+                $scope.databases.splice(index, 1);
+
+                if (isSelected && $scope.databases.length > 0) {
+                    $scope.selectDatabase($scope.databases[0]);
+                }
+            };
+
+            /* Tables */
+            $scope.selectTable = function (table) {
+                $scope.selectedTable = table;
+            };
+            $scope.addTable = function (name) {
+                if (name.trim().length === 0) {
+                    return;
+                }
+
+                var table = {
+                    name: name,
+                    columns: []
+                };
+
+                CurrentDatabaseService.get().tables.push(table);
+                $scope.tableNameEditor = '';
+                $scope.selectTable(table);
+            };
+            $scope.deleteTable = function (index) {
+                var tables = CurrentDatabaseService.get().tables;
+                var isSelected = tables[index] === $scope.selectedTable;
+                tables.splice(index, 1);
+
+                if (isSelected && tables.length > 0) {
+                    $scope.selectTable(tables[0]);
+                }
+            };
+
+            /* Columns */
+            $scope.columnEditor = {};
+            $scope.addColumn = function (name) {
+                if (undefined == name || name.trim().length === 0) {
+                    return;
+                }
+
+                var column = {
+                    name: name,
+                    type: $scope.columnTypeEditor,
+                    isPrimaryKey: $scope.columnEditor.isPrimaryKey
+                };
+
+                $scope.selectedTable.columns.push(column);
+                $scope.columnEditor.isPrimaryKey = false;
+                $scope.columnNameEditor = '';
+                $scope.setFocus('columnNameEditor');
+            };
+            $scope.focusOnNextColumn = function (currentColumnIndex) {
+                var columnNames = document.getElementsByClassName("columnName");
+                if (currentColumnIndex + 1 < columnNames.length) {
+                    columnNames[currentColumnIndex + 1].focus();
+                } else {
+                    $scope.setFocus('columnNameEditor');
+                }
             };
 
             /* Floating Button */
@@ -70,86 +156,6 @@
                     targetEvent: ev,
                     clickOutsideToClose: true
                 });
-            };
-
-            /* Selection */
-            $scope.selectDatabase = function (database) {
-                CurrentDatabaseService.set(database);
-                $scope.tableNameEditor = '';
-                $scope.closeDatabases();
-            };
-            $scope.selectTable = function (table) {
-                $scope.selectedTable = table;
-            };
-            $scope.getCurrentDatabase = function () {
-                return CurrentDatabaseService.get();
-            };
-
-            /* Adding */
-            $scope.addDatabase = function (name) {
-                if (name.trim().length === 0) {
-                    return;
-                }
-
-                var database = {
-                    name: name,
-                    tables: []
-                };
-
-                $scope.databases.push(database);
-                $scope.databaseNameEditor = '';
-                $scope.selectDatabase(database);
-            };
-            $scope.addTable = function (name) {
-                if (name.trim().length === 0) {
-                    return;
-                }
-
-                var table = {
-                    name: name,
-                    columns: []
-                };
-
-                CurrentDatabaseService.get().tables.push(table);
-                $scope.tableNameEditor = '';
-                $scope.selectTable(table);
-            };
-
-            /* Deleting */
-            $scope.deleteDatabase = function (index) {
-                var isSelected = $scope.databases[index] === CurrentDatabaseService.get();
-                $scope.databases.splice(index, 1);
-
-                if (isSelected && $scope.databases.length > 0) {
-                    $scope.selectDatabase($scope.databases[0]);
-                }
-            };
-            $scope.deleteTable = function (index) {
-                var tables = CurrentDatabaseService.get().tables;
-                var isSelected = tables[index] === $scope.selectedTable;
-                tables.splice(index, 1);
-
-                if (isSelected && tables.length > 0) {
-                    $scope.selectTable(tables[0]);
-                }
-            };
-
-            /* Columns Editor */
-            $scope.columnEditor = {};
-            $scope.addColumn = function (name) {
-                if (name.trim().length === 0) {
-                    return;
-                }
-
-                var column = {
-                    name: name,
-                    type: $scope.columnTypeEditor,
-                    isPrimaryKey: $scope.columnEditor.isPrimaryKey
-                };
-
-                $scope.selectedTable.columns.push(column);
-                $scope.columnNameEditor = '';
-                $scope.columnEditor.isPrimaryKey = false;
             };
 
             $scope.addDatabase("Untitled Database");
