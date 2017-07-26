@@ -1,6 +1,7 @@
 ﻿exports.config = {
     framework: 'jasmine',
     baseUrl: 'http://localhost:3000/',
+    directConnect: true,
     specs: [
         'e2e/*.spec.js'
     ],
