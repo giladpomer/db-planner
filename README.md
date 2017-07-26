@@ -1,4 +1,4 @@
-# DB Planner
+# DB Planner [![Build Status](https://travis-ci.org/giladshapira/db-planner.svg?branch=master)](https://travis-ci.org/giladshapira/db-planner)
 Simple &amp; Customizable Database Tables Planner
 
 Plan databases of applications, save them as local JSON files and generate matching files using this data.
