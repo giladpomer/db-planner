@@ -9,7 +9,7 @@ install:
 before_script:
   - http-server -a localhost -p 3000  &
   - npm update protractor -g
-  - webdriver-manager update
+  - webdriver-manager update --versions.chrome=2.24
   - webdriver-manager start --standalone -passthru
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
