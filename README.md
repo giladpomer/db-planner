@@ -11,6 +11,51 @@ DB Planner is available at http://giladshapira.com/db-planner
  + Generate matching files for each table
  + Edit templates online
  
+ ## Setup local environment
+ ### Run on your machine
+ > In order to avoid cross origin problems we will use a Node.js local server
+ + Install [Node.js](http://nodejs.org/)
+ + Install http-server using [npm](https://www.npmjs.com/)
+   ```sh
+   npm install http-server -g
+   ```
+ + Navigate to the root folder of the _DB Planner_ app. for ex.
+   ```sh
+   cd "C:\Projects\db-planner"
+   ```
+ + Start a http-server on port 3000 (every time you want to start the app)
+   ```sh
+   http-server -a localhost -p 3000
+   ```
+   Or run in a new window (non-blocking command):
+   ```sh
+   start http-server -a localhost -p 3000
+   ```
+ + Navigate on your browser to http://localhost:3000/
+ 
+ ### Run E2E tests using [Protractor](http://www.protractortest.org/)
+ > The tests will run automatically after pushing to GitHub using [Travis CI](https://travis-ci.org/giladshapira/db-planner/branches). This section is for running the tests on your machine
+ 
+ > This section assumes you have already completed **Run on your machine** section and you are currently running a version of the app
+ + Install [Java Development Kit (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+ + Install Protractor using [npm](https://www.npmjs.com/)
+   ```sh
+   npm install -g protractor
+   ```
+ + Update & start the webdriver in the background (every time the webdriver is not running)
+   ```sh
+   webdriver-manager update
+   webdriver-manager start --standalone -passthru
+   ```
+ + Navigate to the root folder of the _DB Planner_ app. for ex.
+   ```sh
+   cd "C:\Projects\db-planner"
+   ```
+ + Run the tests on Chrome (every time you want to run the tests)
+   ```sh
+   protractor ./test/protractor.conf.js
+   ```
+ 
  ## Templates
  ### Available templates
  + Android (Java) & Sqlite
