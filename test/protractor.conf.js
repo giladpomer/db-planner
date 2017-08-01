@@ -1,6 +1,7 @@
 ﻿exports.config = {
     framework: 'jasmine',
     baseUrl: 'http://localhost:3000/',
+	seleniumAddress: 'http://localhost:4444/wd/hub',
     directConnect: true,
     specs: [
         'e2e/*.spec.js'
