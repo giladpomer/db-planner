@@ -8,7 +8,6 @@ install:
 
 before_script:
   - http-server -a localhost -p 3000 &
-  - webdriver-manager clean
   - webdriver-manager update
   - webdriver-manager start &
   - export DISPLAY=:99.0
