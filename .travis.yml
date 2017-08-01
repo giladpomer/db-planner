@@ -2,10 +2,6 @@ language: node_js
 node_js:
   - "stable"
 
-cache:
-  directories:
-    - node_modules
-  
 install:
   - npm install http-server -g
   - npm install -g protractor
