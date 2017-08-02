@@ -1,7 +1,7 @@
 ﻿<md-toolbar>
     <div class="md-toolbar-tools">
         <span flex>Databases ({{databases.length}})</span>
-        <md-button class="md-icon-button" ng-click="closeDatabases()">
+        <md-button class="md-icon-button" ng-click="closeDatabases()" id="closeDatabases">
             <md-icon md-svg-src="assets/svg/close.svg" aria-label="Close dialog"></md-icon>
         </md-button>
     </div>
@@ -12,7 +12,7 @@
         <input type="text" ng-model="databaseNameEditor" placeholder="Database Name" on-enter-key="addDatabase(databaseNameEditor)" id="databaseNameEditor">
     </md-input-container>
     <md-card-actions layout="row" layout-align="end center">
-        <md-button ng-click="addDatabase(databaseNameEditor)">Add</md-button>
+        <md-button ng-click="addDatabase(databaseNameEditor)" id="addDatabaseButton">Add</md-button>
     </md-card-actions>
 </md-card>
 
@@ -22,7 +22,7 @@
             <h3>{{database.name}}</h3>
             <p>{{database.tables.length}} tables</p>
         </div>
-        <md-button class="md-icon-button md-secondary" aria-label="Delete" ng-click="deleteDatabase($event, $index)">
+        <md-button class="md-icon-button md-secondary delete-database-button" aria-label="Delete" ng-click="deleteDatabase($event, $index)">
             <md-icon md-svg-icon="assets/svg/delete.svg" class="delete"></md-icon>
         </md-button>
 
