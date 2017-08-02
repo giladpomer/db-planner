@@ -56,6 +56,8 @@
                 $scope.selectDatabase(database);
             };
             $scope.deleteDatabase = function (ev, index) {
+                var database = $scope.databases[index];
+
                 function deleteWithoutConfirm(index) {
                     var isSelected = database === CurrentDatabaseService.get();
                     $scope.databases.splice(index, 1);
@@ -65,8 +67,6 @@
                     }
                 }
 
-                var database = $scope.databases[index];
-
                 var confirm = $mdDialog.confirm()
                   .clickOutsideToClose(true)
                   .title('Delete database: ' + database.name + '?')
@@ -75,9 +75,13 @@
                   .ok('Delete')
                   .cancel('Cancel');
 
-                $mdDialog.show(confirm).then(function () {
+                if (database.tables.length > 0) {
+                    $mdDialog.show(confirm).then(function () {
+                        deleteWithoutConfirm(index);
+                    });
+                } else {
                     deleteWithoutConfirm(index);
-                });
+                }
             };
 
             /* Tables */
