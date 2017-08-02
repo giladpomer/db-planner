@@ -16,6 +16,7 @@ md-icon.delete svg {
     transition: 0.2s;
     fill: darkgray;
 }
+
 md-icon.delete:hover svg {
     fill: gray;
 }
@@ -94,15 +95,19 @@ md-dialog {
     max-height: 95%;
 }
 
-md-dialog-content {
+.md-dialog-container {
+    z-index: 200;
+}
+
+md-dialog.dialog-big md-dialog-content {
     width: 800px;
     max-height: 800px;
     max-width: 100%;
 }
 
-    md-dialog-content md-progress-circular {
-        margin: 20px;
-    }
+md-dialog-content md-progress-circular {
+    margin: 20px;
+}
 
 /* ACE editors */
 .create-statements.ace_editor {
