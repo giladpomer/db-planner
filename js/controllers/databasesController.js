@@ -35,7 +35,10 @@
 
             $scope.selectDatabase = function (database) {
                 CurrentDatabaseService.set(database);
-                $scope.tableNameEditor = '';
+                var tables = database.tables;
+                if (tables.length > 0) {
+                    $scope.selectTable(tables[0]);
+                }
                 $scope.closeDatabases();
             };
             $scope.getCurrentDatabase = function () {
