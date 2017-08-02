@@ -95,6 +95,10 @@ md-dialog {
     max-height: 95%;
 }
 
+.md-dialog-container {
+    z-index: 200;
+}
+
 md-dialog.dialog-big md-dialog-content {
     width: 800px;
     max-height: 800px;
