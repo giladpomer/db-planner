@@ -1,7 +1,7 @@
 ﻿angular.module('dbPlannerApp').factory('TemplatesService',
             ['$http', '$q',
     function ($http, $q) {
-        var templatesBaseFolder = '/db-planner/templates/';
+        var templatesBaseFolder = './templates/';
         var templateFolders = [
             'Android_SQLite'
         ];
