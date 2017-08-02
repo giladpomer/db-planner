@@ -13,7 +13,7 @@
         shardTestFiles: true,
         chromeOptions: {
             // disable "chrome is being controlled by automated software"
-            'args': ['disable-infobars=true'],
+            'args': ['disable-infobars=true', 'window-size=1024,768'],
 
             // disable Password manager popup
             'prefs': {
