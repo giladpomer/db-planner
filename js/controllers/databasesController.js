@@ -102,13 +102,33 @@
                 $scope.tableNameEditor = '';
                 $scope.selectTable(table);
             };
-            $scope.deleteTable = function (index) {
+            $scope.deleteTable = function (ev, index) {
                 var tables = CurrentDatabaseService.get().tables;
-                var isSelected = tables[index] === $scope.selectedTable;
-                tables.splice(index, 1);
+                var table = tables[index];
 
-                if (isSelected && tables.length > 0) {
-                    $scope.selectTable(tables[0]);
+                function deleteWithoutConfirm(index) {
+                    var isSelected = table === $scope.selectedTable;
+                    tables.splice(index, 1);
+
+                    if (isSelected && tables.length > 0) {
+                        $scope.selectTable(tables[0]);
+                    }
+                }
+
+                var confirm = $mdDialog.confirm()
+                  .clickOutsideToClose(true)
+                  .title('Delete table: ' + table.name + '?')
+                  .ariaLabel('Confirm delete table')
+                  .targetEvent(ev)
+                  .ok('Delete')
+                  .cancel('Cancel');
+
+                if (table.columns.length > 0) {
+                    $mdDialog.show(confirm).then(function () {
+                        deleteWithoutConfirm(index);
+                    });
+                } else {
+                    deleteWithoutConfirm(index);
                 }
             };
 
