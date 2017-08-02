@@ -9,6 +9,8 @@
 
     capabilities: {
         browserName: 'chrome',
+        maxInstances: 3,
+        shardTestFiles: true,
         chromeOptions: {
             // disable "chrome is being controlled by automated software"
             'args': ['disable-infobars=true'],
