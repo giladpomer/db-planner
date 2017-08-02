@@ -55,13 +55,29 @@
                 $scope.databaseNameEditor = '';
                 $scope.selectDatabase(database);
             };
-            $scope.deleteDatabase = function (index) {
-                var isSelected = $scope.databases[index] === CurrentDatabaseService.get();
-                $scope.databases.splice(index, 1);
+            $scope.deleteDatabase = function (ev, index) {
+                function deleteWithoutConfirm(index) {
+                    var isSelected = database === CurrentDatabaseService.get();
+                    $scope.databases.splice(index, 1);
 
-                if (isSelected && $scope.databases.length > 0) {
-                    $scope.selectDatabase($scope.databases[0]);
+                    if (isSelected && $scope.databases.length > 0) {
+                        $scope.selectDatabase($scope.databases[0]);
+                    }
                 }
+
+                var database = $scope.databases[index];
+
+                var confirm = $mdDialog.confirm()
+                  .clickOutsideToClose(true)
+                  .title('Delete database: ' + database.name + '?')
+                  .ariaLabel('Confirm delete database')
+                  .targetEvent(ev)
+                  .ok('Delete')
+                  .cancel('Cancel');
+
+                $mdDialog.show(confirm).then(function () {
+                    deleteWithoutConfirm(index);
+                });
             };
 
             /* Tables */

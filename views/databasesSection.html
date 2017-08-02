@@ -22,7 +22,7 @@
             <h3>{{database.name}}</h3>
             <p>{{database.tables.length}} tables</p>
         </div>
-        <md-button class="md-icon-button md-secondary" aria-label="Delete" ng-click="deleteDatabase($index)">
+        <md-button class="md-icon-button md-secondary" aria-label="Delete" ng-click="deleteDatabase($event, $index)">
             <md-icon md-svg-icon="assets/svg/delete.svg" class="delete"></md-icon>
         </md-button>
 
