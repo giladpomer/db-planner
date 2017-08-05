@@ -17,6 +17,7 @@
     var databaseNameEditor = element(by.model('databaseNameEditor'));
     var addDatabaseButton = element(by.id('addDatabaseButton'));
     var databasesList = element.all(by.repeater('database in databases'));
+    var selectedDatabase = element(by.model('getCurrentDatabase().name'));
 
     this.showList = function () {
         toggleDatabases.click();
@@ -25,6 +26,9 @@
         closeDatabases.click();
     };
 
+    this.getEditorText = function () {
+        return databaseNameEditor.getAttribute('value');
+    };
     this.setEditorText = function (databaseName) {
         databaseNameEditor.sendKeys(databaseName);
     };
@@ -36,9 +40,25 @@
         this.setEditorText(databaseName);
         this.clickAdd();
     };
+    this.addMulti = function (databaseNames) {
+        for (var i = 0; i < databaseNames.length; i++) {
+            this.showList();
+            this.add(databaseNames[i]);
+        }
+    };
+
+    this.getSelectedDatabaseName = function () {
+        return selectedDatabase.getAttribute('value');
+    };
+    this.setSelectedDatabaseName = function (tableName) {
+        selectedDatabase.sendKeys(tableName);
+    };
 
     this.count = function () {
         return databasesList.count();
+    };
+    this.select = function (index) {
+        databasesList.get(index).click();
     };
 
     this.getLast = function () {

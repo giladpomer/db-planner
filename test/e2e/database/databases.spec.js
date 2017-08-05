@@ -9,6 +9,60 @@ describe('Databases', function () {
         browser.get(browser.baseUrl);
     });
 
+    it('should add and select database', function () {
+        var databaseName = 'MyDatabase';
+
+        databases.showList();
+        expect(databases.count()).toEqual(1);
+        databases.setEditorText(databaseName);
+        expect(databases.getEditorText()).toEqual(databaseName);
+        databases.clickAdd();
+        databases.showList();
+        expect(databases.getEditorText()).toEqual('');
+
+        expect(databases.count()).toEqual(2);
+        expect(databases.getLast().getName()).toEqual(databaseName);
+        databases.hideList();
+        expect(databases.getSelectedDatabaseName()).toEqual(databaseName);
+    });
+    it('should switch selected database', function () {
+        var names = ['DatabaseOne', 'DatabaseTwo', 'DatabaseThree'];
+        databases.addMulti(names);
+
+        expect(databases.getSelectedDatabaseName()).toEqual(names[2]);
+
+        var indexes = [0, 2, 1];
+        for (var i = 0; i < indexes.length; i++) {
+            var index = indexes[i];
+            databases.showList();
+            databases.select(index + 1);
+            expect(databases.getSelectedDatabaseName()).toEqual(names[index]);
+        }
+    });
+    it('should edit database name', function () {
+        function expectLastDatabaseNameToBe(databaseName) {
+            databases.showList();
+            expect(databases.count()).toEqual(2);
+            expect(databases.getLast().getName()).toEqual(databaseName);
+            databases.hideList();
+            expect(databases.getSelectedDatabaseName()).toEqual(databaseName);
+        }
+
+        var oldDatabaseName = 'OldDatabaseName';
+        var newDatabaseName = 'NewDatabaseName';
+        databases.showList();
+        databases.add(oldDatabaseName);
+
+        //Before changing
+        expectLastDatabaseNameToBe(oldDatabaseName);
+
+        //Change the table name
+        databases.setSelectedDatabaseName(newDatabaseName);
+
+        //After changing
+        expectLastDatabaseNameToBe(newDatabaseName);
+    });
+
     describe('Delete', function () {
         beforeEach(function () {
             var databaseName = 'DatabaseName';
