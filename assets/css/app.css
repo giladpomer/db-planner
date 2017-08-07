@@ -32,7 +32,7 @@ md-icon.delete:hover svg {
 
 /* List Items */
 md-sidenav md-list {
-    padding: 0px 0px 8px 0px;
+    padding: 0 0 8px 0;
 }
 
 md-list-item {

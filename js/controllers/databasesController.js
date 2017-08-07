@@ -138,7 +138,7 @@
             /* Columns */
             $scope.columnEditor = {};
             $scope.addColumn = function (name) {
-                if (undefined == name || name.trim().length === 0) {
+                if (undefined === name || name.trim().length === 0) {
                     return;
                 }
 
