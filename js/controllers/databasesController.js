@@ -13,6 +13,15 @@
                     .hideDelay(3000)
                 );
             }
+            function confirmDeleteDialog(type, name, ev) {
+                return $mdDialog.confirm()
+                                  .clickOutsideToClose(true)
+                                  .title('Delete ' + type + ': ' + name + '?')
+                                  .ariaLabel('Confirm delete ' + type)
+                                  .targetEvent(ev)
+                                  .ok('Delete')
+                                  .cancel('Cancel');
+            }
 
             /* Databases */
             $scope.databases = [];
@@ -70,14 +79,7 @@
                     }
                 }
 
-                var confirm = $mdDialog.confirm()
-                  .clickOutsideToClose(true)
-                  .title('Delete database: ' + database.name + '?')
-                  .ariaLabel('Confirm delete database')
-                  .targetEvent(ev)
-                  .ok('Delete')
-                  .cancel('Cancel');
-
+                var confirm = confirmDeleteDialog('database', database.name, ev);
                 if (database.tables.length > 0) {
                     $mdDialog.show(confirm).then(function () {
                         deleteWithoutConfirm(index);
@@ -118,14 +120,7 @@
                     }
                 }
 
-                var confirm = $mdDialog.confirm()
-                  .clickOutsideToClose(true)
-                  .title('Delete table: ' + table.name + '?')
-                  .ariaLabel('Confirm delete table')
-                  .targetEvent(ev)
-                  .ok('Delete')
-                  .cancel('Cancel');
-
+                var confirm = confirmDeleteDialog('table', table.name, ev);
                 if (table.columns.length > 0) {
                     $mdDialog.show(confirm).then(function () {
                         deleteWithoutConfirm(index);
@@ -166,14 +161,18 @@
             $scope.noTablesInCurrentDB = function () {
                 return $scope.databases.length === 0 || CurrentDatabaseService.get().tables.length === 0;
             };
-            $scope.openGeneratedFilesDialog = function (ev) {
-                $mdDialog.show({
-                    controller: 'GeneratedFilesDialogController',
-                    templateUrl: 'views/dialogs/generatedFilesDialog.html',
+
+            function openDialog(name, ev) {
+                return $mdDialog.show({
+                    controller: name + 'Controller',
+                    templateUrl: 'views/dialogs/' + name + '.html',
                     parent: angular.element(document.body),
                     targetEvent: ev,
                     clickOutsideToClose: true
-                }).then(function (dataToDownload) {
+                });
+            }
+            $scope.openGeneratedFilesDialog = function (ev) {
+                openDialog('GeneratedFilesDialog', ev).then(function (dataToDownload) {
                     if (dataToDownload.length === 1) {
                         showToast('Downloading ' + dataToDownload[0].fileName);
                     } else {
@@ -192,13 +191,7 @@
                 FileGeneratorService.download(database.name + '.json', data);
             };
             $scope.openTemplatesEditorDialog = function (ev) {
-                $mdDialog.show({
-                    controller: 'TemplatesEditorDialogController',
-                    templateUrl: 'views/dialogs/templatesEditorDialog.html',
-                    parent: angular.element(document.body),
-                    targetEvent: ev,
-                    clickOutsideToClose: true
-                });
+                openDialog('TemplatesEditorDialog', ev);
             };
 
             $scope.addDatabase("Untitled Database");
