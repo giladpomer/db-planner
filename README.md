@@ -10,6 +10,11 @@ DB Planner is available [here](http://ec2-52-10-222-33.us-west-2.compute.amazona
  + Plan the database structure (tables & columns)
  + Generate matching files for each table
  + Edit templates online
+
+## Screenshots
+![image](https://user-images.githubusercontent.com/26198102/183843777-b951eb1c-e20b-43e6-a9c4-565734939960.png)
+![image](https://user-images.githubusercontent.com/26198102/183843870-55a2cd90-207c-4daf-840d-9c54990e39ec.png)
+![image](https://user-images.githubusercontent.com/26198102/183843885-7dc17713-e942-4c72-9fcf-4d174b83f76f.png)
  
  ## Setup local environment
  ### Run on your machine
