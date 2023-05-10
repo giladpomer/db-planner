@@ -3,9 +3,6 @@ Simple &amp; Customizable Database Tables Planner
 
 Plan databases of applications, save them as local JSON files and generate matching files using this data.
 
-## Try it now!
-DB Planner is available [here](http://ec2-52-10-222-33.us-west-2.compute.amazonaws.com/db-planner)
-
 ## Features
  + Plan the database structure (tables & columns)
  + Generate matching files for each table
